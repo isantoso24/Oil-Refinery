@@ -5,4 +5,15 @@ date: "07/29/2024"
 output: html_document
 ---
 
+```{r install-packages}
+#install.packages("readxl")
+library(readxl)
+```
+
+```{r read-file}
+calls_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "CALLS", na = "NA")
+
+
+```
+
 
