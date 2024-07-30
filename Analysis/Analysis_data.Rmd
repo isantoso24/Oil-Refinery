@@ -12,8 +12,83 @@ library(readxl)
 
 ```{r read-file}
 calls_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
+calls_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
+calls_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_202 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+```
+
+```{r}
+calls_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+```
+
+```{r}
+calls_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 ```
 
 
