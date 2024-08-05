@@ -5,90 +5,174 @@ date: "07/29/2024"
 output: html_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE)
+```
+
 ```{r install-packages}
 #install.packages("readxl")
 library(readxl)
+#install.packages("dplyr")
+library(dplyr)
 ```
 
 ```{r read-file}
-calls_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2010 <- read_excel("/cloud/project/Data/CY10.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2010 <- read_excel("~/Oil-Refinery/Data/CY10.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2010 <- read_excel("~/Oil-Refinery/Data/CY10.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2010 <- read_excel("~/Oil-Refinery/Data/CY10.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2010 <- read_excel("~/Oil-Refinery/Data/CY10.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
-calls_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2011 <- read_excel("/cloud/project/Data/CY11.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2011 <- read_excel("~/Oil-Refinery/Data/CY11.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2011 <- read_excel("~/Oil-Refinery/Data/CY11.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2011 <- read_excel("~/Oil-Refinery/Data/CY11.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2011 <- read_excel("~/Oil-Refinery/Data/CY11.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
-calls_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2012 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_202 <- read_excel("/cloud/project/Data/CY12.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2012 <- read_excel("~/Oil-Refinery/Data/CY12.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2012 <- read_excel("~/Oil-Refinery/Data/CY12.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2012 <- read_excel("~/Oil-Refinery/Data/CY12.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2012 <- read_excel("~/Oil-Refinery/Data/CY12.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
-calls_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2013 <- read_excel("/cloud/project/Data/CY13.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2013 <- read_excel("~/Oil-Refinery/Data/CY13.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2013 <- read_excel("~/Oil-Refinery/Data/CY13.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2013 <- read_excel("~/Oil-Refinery/Data/CY13.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2013 <- read_excel("~/Oil-Refinery/Data/CY13.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
-calls_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2014 <- read_excel("/cloud/project/Data/CY14.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2014 <- read_excel("~/Oil-Refinery/Data/CY14.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2014 <- read_excel("~/Oil-Refinery/Data/CY14.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2014 <- read_excel("~/Oil-Refinery/Data/CY14.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2014 <- read_excel("~/Oil-Refinery/Data/CY14.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 
-calls_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2015 <- read_excel("/cloud/project/Data/CY15.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+calls_2015 <- read_excel("~/Oil-Refinery/Data/CY15.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2015 <- read_excel("~/Oil-Refinery/Data/CY15.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2015 <- read_excel("~/Oil-Refinery/Data/CY15.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2015 <- read_excel("~/Oil-Refinery/Data/CY15.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2016 <- read_excel("~/Oil-Refinery/Data/CY16.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2016 <- read_excel("~/Oil-Refinery/Data/CY16.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2016 <- read_excel("~/Oil-Refinery/Data/CY16.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2016 <- read_excel("~/Oil-Refinery/Data/CY16.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2017 <- read_excel("~/Oil-Refinery/Data/CY17.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2017 <- read_excel("~/Oil-Refinery/Data/CY17.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2017 <- read_excel("~/Oil-Refinery/Data/CY17.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2017 <- read_excel("~/Oil-Refinery/Data/CY17.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2018 <- read_excel("~/Oil-Refinery/Data/CY18.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2018 <- read_excel("~/Oil-Refinery/Data/CY18.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2018 <- read_excel("~/Oil-Refinery/Data/CY18.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2018 <- read_excel("~/Oil-Refinery/Data/CY18.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2019 <- read_excel("~/Oil-Refinery/Data/CY19.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2019 <- read_excel("~/Oil-Refinery/Data/CY19.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2019 <- read_excel("~/Oil-Refinery/Data/CY19.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2019 <- read_excel("~/Oil-Refinery/Data/CY19.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2020 <- read_excel("~/Oil-Refinery/Data/CY20.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2020 <- read_excel("~/Oil-Refinery/Data/CY20.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2020 <- read_excel("~/Oil-Refinery/Data/CY20.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2020 <- read_excel("~/Oil-Refinery/Data/CY20.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2021 <- read_excel("~/Oil-Refinery/Data/CY21.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2021 <- read_excel("~/Oil-Refinery/Data/CY21.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2021 <- read_excel("~/Oil-Refinery/Data/CY21.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2021 <- read_excel("~/Oil-Refinery/Data/CY21.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2022 <- read_excel("~/Oil-Refinery/Data/CY22.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2022 <- read_excel("~/Oil-Refinery/Data/CY22.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2022 <- read_excel("~/Oil-Refinery/Data/CY22.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2022 <- read_excel("~/Oil-Refinery/Data/CY22.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2023 <- read_excel("~/Oil-Refinery/Data/CY23.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2023 <- read_excel("~/Oil-Refinery/Data/CY23.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2023 <- read_excel("~/Oil-Refinery/Data/CY23.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2023 <- read_excel("~/Oil-Refinery/Data/CY23.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+
+calls_2024 <- read_excel("~/Oil-Refinery/Data/CY24.xlsx", sheet = "CALLS", na = "NA")
+incident_commons_2024 <- read_excel("~/Oil-Refinery/Data/CY24.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
+incident_details_2024 <- read_excel("~/Oil-Refinery/Data/CY24.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
+material_involved_2024 <- read_excel("~/Oil-Refinery/Data/CY24.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
 ```
+
 
 ```{r}
-calls_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2016 <- read_excel("/cloud/project/Data/CY16.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+full_2010 <- calls_2010 %>%
+  full_join(incident_commons_2010, by = "SEQNOS") %>%
+  full_join(incident_details_2010, by = "SEQNOS") %>%
+  full_join(material_involved_2010, by = "SEQNOS")
 
-calls_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2017 <- read_excel("/cloud/project/Data/CY17.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+full_2011 <- calls_2011 %>%
+  full_join(incident_commons_2011, by = "SEQNOS") %>%
+  full_join(incident_details_2011, by = "SEQNOS") %>%
+  full_join(material_involved_2011, by = "SEQNOS")
 
-calls_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2018 <- read_excel("/cloud/project/Data/CY18.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+full_2012 <- calls_2012 %>%
+  full_join(incident_commons_2012, by = "SEQNOS") %>%
+  full_join(incident_details_2012, by = "SEQNOS") %>%
+  full_join(material_involved_2012, by = "SEQNOS")
 
-calls_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2019 <- read_excel("/cloud/project/Data/CY19.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+full_2013 <- calls_2013 %>%
+  full_join(incident_commons_2013, by = "SEQNOS") %>%
+  full_join(incident_details_2013, by = "SEQNOS") %>%
+  full_join(material_involved_2013, by = "SEQNOS")
 
-calls_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2020 <- read_excel("/cloud/project/Data/CY20.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
+full_2014 <- calls_2014 %>%
+  full_join(incident_commons_2014, by = "SEQNOS") %>%
+  full_join(incident_details_2014, by = "SEQNOS") %>%
+  full_join(material_involved_2014, by = "SEQNOS")
+
+full_2015 <- calls_2015 %>%
+  full_join(incident_commons_2015, by = "SEQNOS") %>%
+  full_join(incident_details_2015, by = "SEQNOS") %>%
+  full_join(material_involved_2015, by = "SEQNOS")
+
+full_2016 <- calls_2016 %>%
+  full_join(incident_commons_2016, by = "SEQNOS") %>%
+  full_join(incident_details_2016, by = "SEQNOS") %>%
+  full_join(material_involved_2016, by = "SEQNOS")
+
+full_2017 <- calls_2017 %>%
+  full_join(incident_commons_2017, by = "SEQNOS") %>%
+  full_join(incident_details_2017, by = "SEQNOS") %>%
+  full_join(material_involved_2017, by = "SEQNOS")
+
+full_2017 <- calls_2017 %>%
+  full_join(incident_commons_2017, by = "SEQNOS") %>%
+  full_join(incident_details_2017, by = "SEQNOS") %>%
+  full_join(material_involved_2017, by = "SEQNOS")
+
+full_2018 <- calls_2018 %>%
+  full_join(incident_commons_2018, by = "SEQNOS") %>%
+  full_join(incident_details_2018, by = "SEQNOS") %>%
+  full_join(material_involved_2018, by = "SEQNOS")
+
+full_2019 <- calls_2019 %>%
+  full_join(incident_commons_2019, by = "SEQNOS") %>%
+  full_join(incident_details_2019, by = "SEQNOS") %>%
+  full_join(material_involved_2019, by = "SEQNOS")
+
+full_2020 <- calls_2020 %>%
+  full_join(incident_commons_2020, by = "SEQNOS") %>%
+  full_join(incident_details_2020, by = "SEQNOS") %>%
+  full_join(material_involved_2020, by = "SEQNOS")
+
+full_2021 <- calls_2021 %>%
+  full_join(incident_commons_2021, by = "SEQNOS") %>%
+  full_join(incident_details_2021, by = "SEQNOS") %>%
+  full_join(material_involved_2021, by = "SEQNOS")
+
+full_2022 <- calls_2022 %>%
+  full_join(incident_commons_2022, by = "SEQNOS") %>%
+  full_join(incident_details_2022, by = "SEQNOS") %>%
+  full_join(material_involved_2022, by = "SEQNOS")
+
+full_2023 <- calls_2023 %>%
+  full_join(incident_commons_2023, by = "SEQNOS") %>%
+  full_join(incident_details_2023, by = "SEQNOS") %>%
+  full_join(material_involved_2023, by = "SEQNOS")
+
+full_2024 <- calls_2024 %>%
+  full_join(incident_commons_2024, by = "SEQNOS") %>%
+  full_join(incident_details_2024, by = "SEQNOS") %>%
+  full_join(material_involved_2024, by = "SEQNOS")
 ```
-
-```{r}
-calls_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2021 <- read_excel("/cloud/project/Data/CY21.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
-
-calls_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2022 <- read_excel("/cloud/project/Data/CY22.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
-
-calls_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2023 <- read_excel("/cloud/project/Data/CY23.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
-
-calls_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "CALLS", na = "NA")
-incident_commons_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "INCIDENT_COMMONS", na = "NA")
-incident_details_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "INCIDENT_DETAILS", na = "NA")
-material_involved_2024 <- read_excel("/cloud/project/Data/CY24.xlsx", sheet = "MATERIAL_INVOLVED", na = "NA")
-```
-
 
