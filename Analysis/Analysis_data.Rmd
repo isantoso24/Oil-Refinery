@@ -14,7 +14,7 @@ knitr::opts_chunk$set(warning = FALSE)
 library(readxl)
 #install.packages("dplyr")
 library(dplyr)
-install.packages("readr")
+#install.packages("readr")
 library(readr)
 ```
 
@@ -315,5 +315,7 @@ df_full <- bind_rows(full_2010, full_2011, full_2012, full_2013, full_2014, full
 
 ```{r}
 #write.csv(df_full, "~/Oil-Refinery/Analysis/Join Data/Full Merge/full_merge.csv", row.names = FALSE)
+write.csv(df_full, gzfile("~/Oil-Refinery/Analysis/Join Data/Full Merge/full_merge_compressed.csv.gz"), row.names = FALSE)
+
 ```
 

@@ -369,6 +369,8 @@ library(dplyr)</code></pre>
 <pre><code>## The following objects are masked from &#39;package:base&#39;:
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>#install.packages(&quot;readr&quot;)
+library(readr)</code></pre>
 <pre class="r"><code>calls_2010 &lt;- read_excel(&quot;~/Oil-Refinery/Data/CY10.xlsx&quot;, sheet = &quot;CALLS&quot;, na = &quot;NA&quot;)
 incident_commons_2010 &lt;- read_excel(&quot;~/Oil-Refinery/Data/CY10.xlsx&quot;, sheet = &quot;INCIDENT_COMMONS&quot;, na = &quot;NA&quot;)
 incident_details_2010 &lt;- read_excel(&quot;~/Oil-Refinery/Data/CY10.xlsx&quot;, sheet = &quot;INCIDENT_DETAILS&quot;, na = &quot;NA&quot;)
@@ -522,6 +524,366 @@ full_2024 &lt;- calls_2024 %&gt;%
   full_join(incident_commons_2024, by = &quot;SEQNOS&quot;) %&gt;%
   full_join(incident_details_2024, by = &quot;SEQNOS&quot;) %&gt;%
   full_join(material_involved_2024, by = &quot;SEQNOS&quot;)</code></pre>
+<pre class="r"><code># Export the data frame to a CSV file
+write.csv(full_2010, &quot;~/Oil-Refinery/Analysis/Join Data/full_2010.csv&quot;, row.names = FALSE)
+write.csv(full_2011, &quot;~/Oil-Refinery/Analysis/Join Data/full_2011.csv&quot;, row.names = FALSE)
+write.csv(full_2012, &quot;~/Oil-Refinery/Analysis/Join Data/full_2012.csv&quot;, row.names = FALSE)
+write.csv(full_2013, &quot;~/Oil-Refinery/Analysis/Join Data/full_2013.csv&quot;, row.names = FALSE)
+write.csv(full_2014, &quot;~/Oil-Refinery/Analysis/Join Data/full_2014.csv&quot;, row.names = FALSE)
+write.csv(full_2015, &quot;~/Oil-Refinery/Analysis/Join Data/full_2015.csv&quot;, row.names = FALSE)
+write.csv(full_2016, &quot;~/Oil-Refinery/Analysis/Join Data/full_2016.csv&quot;, row.names = FALSE)
+write.csv(full_2017, &quot;~/Oil-Refinery/Analysis/Join Data/full_2017.csv&quot;, row.names = FALSE)
+write.csv(full_2018, &quot;~/Oil-Refinery/Analysis/Join Data/full_2018.csv&quot;, row.names = FALSE)
+write.csv(full_2019, &quot;~/Oil-Refinery/Analysis/Join Data/full_2019.csv&quot;, row.names = FALSE)
+write.csv(full_2020, &quot;~/Oil-Refinery/Analysis/Join Data/full_2020.csv&quot;, row.names = FALSE)
+write.csv(full_2021, &quot;~/Oil-Refinery/Analysis/Join Data/full_2021.csv&quot;, row.names = FALSE)
+write.csv(full_2022, &quot;~/Oil-Refinery/Analysis/Join Data/full_2022.csv&quot;, row.names = FALSE)
+write.csv(full_2023, &quot;~/Oil-Refinery/Analysis/Join Data/full_2023.csv&quot;, row.names = FALSE)
+write.csv(full_2024, &quot;~/Oil-Refinery/Analysis/Join Data/full_2024.csv&quot;, row.names = FALSE)</code></pre>
+<pre class="r"><code>full_2010$RESPONSIBLE_ZIP &lt;- as.double(full_2010$RESPONSIBLE_ZIP)
+full_2011$RESPONSIBLE_ZIP &lt;- as.double(full_2011$RESPONSIBLE_ZIP)
+full_2012$RESPONSIBLE_ZIP &lt;- as.double(full_2012$RESPONSIBLE_ZIP)
+full_2013$RESPONSIBLE_ZIP &lt;- as.double(full_2013$RESPONSIBLE_ZIP)
+full_2014$RESPONSIBLE_ZIP &lt;- as.double(full_2014$RESPONSIBLE_ZIP)
+full_2015$RESPONSIBLE_ZIP &lt;- as.double(full_2015$RESPONSIBLE_ZIP)
+full_2016$RESPONSIBLE_ZIP &lt;- as.double(full_2016$RESPONSIBLE_ZIP)
+full_2017$RESPONSIBLE_ZIP &lt;- as.double(full_2017$RESPONSIBLE_ZIP)
+full_2018$RESPONSIBLE_ZIP &lt;- as.double(full_2018$RESPONSIBLE_ZIP)
+full_2019$RESPONSIBLE_ZIP &lt;- as.double(full_2019$RESPONSIBLE_ZIP)
+full_2020$RESPONSIBLE_ZIP &lt;- as.double(full_2020$RESPONSIBLE_ZIP)
+full_2021$RESPONSIBLE_ZIP &lt;- as.double(full_2021$RESPONSIBLE_ZIP)
+full_2022$RESPONSIBLE_ZIP &lt;- as.double(full_2022$RESPONSIBLE_ZIP)
+full_2023$RESPONSIBLE_ZIP &lt;- as.double(full_2023$RESPONSIBLE_ZIP)
+full_2024$RESPONSIBLE_ZIP &lt;- as.double(full_2024$RESPONSIBLE_ZIP)</code></pre>
+<pre class="r"><code># List all data frame names
+data_frames &lt;- mget(ls(pattern = &quot;^full_\\d{4}$&quot;))
+
+# Extract column names from each data frame
+col_names_list &lt;- lapply(data_frames, names)
+
+# Find unique column names across all data frames
+unique_col_names &lt;- unique(unlist(col_names_list))
+
+# Print unique column names
+print(unique_col_names)</code></pre>
+<pre><code>##   [1] &quot;SEQNOS&quot;                        &quot;DATE_TIME_RECEIVED&quot;           
+##   [3] &quot;DATE_TIME_COMPLETE&quot;            &quot;CALLTYPE&quot;                     
+##   [5] &quot;RESPONSIBLE_COMPANY&quot;           &quot;RESPONSIBLE_ORG_TYPE&quot;         
+##   [7] &quot;RESPONSIBLE_CITY&quot;              &quot;RESPONSIBLE_STATE&quot;            
+##   [9] &quot;RESPONSIBLE_ZIP&quot;               &quot;SOURCE&quot;                       
+##  [11] &quot;DESCRIPTION_OF_INCIDENT&quot;       &quot;TYPE_OF_INCIDENT&quot;             
+##  [13] &quot;INCIDENT_CAUSE&quot;                &quot;INCIDENT_DATE_TIME&quot;           
+##  [15] &quot;INCIDENT_DTG&quot;                  &quot;INCIDENT_LOCATION&quot;            
+##  [17] &quot;LOCATION_ADDRESS&quot;              &quot;LOCATION_STREET1&quot;             
+##  [19] &quot;LOCATION_STREET2&quot;              &quot;LOCATION_NEAREST_CITY&quot;        
+##  [21] &quot;LOCATION_STATE&quot;                &quot;LOCATION_COUNTY&quot;              
+##  [23] &quot;LOCATION_ZIP&quot;                  &quot;DISTANCE_FROM_CITY&quot;           
+##  [25] &quot;DISTANCE_UNITS&quot;                &quot;DIRECTION_FROM_CITY&quot;          
+##  [27] &quot;LAT_DEG&quot;                       &quot;LAT_MIN&quot;                      
+##  [29] &quot;LAT_SEC&quot;                       &quot;LAT_QUAD&quot;                     
+##  [31] &quot;LONG_DEG&quot;                      &quot;LONG_MIN&quot;                     
+##  [33] &quot;LONG_SEC&quot;                      &quot;LONG_QUAD&quot;                    
+##  [35] &quot;LOCATION_SECTION&quot;              &quot;LOCATION_TOWNSHIP&quot;            
+##  [37] &quot;LOCATION_RANGE&quot;                &quot;POTENTIAL_FLAG&quot;               
+##  [39] &quot;FIRE_INVOLVED&quot;                 &quot;FIRE_EXTINGUISHED&quot;            
+##  [41] &quot;ANY_EVACUATIONS&quot;               &quot;NUMBER_EVACUATED&quot;             
+##  [43] &quot;WHO_EVACUATED&quot;                 &quot;RADIUS_OF_EVACUATION&quot;         
+##  [45] &quot;ANY_INJURIES&quot;                  &quot;NUMBER_INJURED&quot;               
+##  [47] &quot;NUMBER_HOSPITALIZED&quot;           &quot;ANY_FATALITIES&quot;               
+##  [49] &quot;NUMBER_FATALITIES&quot;             &quot;ANY_DAMAGES&quot;                  
+##  [51] &quot;DAMAGE_AMOUNT&quot;                 &quot;AIR_CORRIDOR_CLOSED&quot;          
+##  [53] &quot;AIR_CORRIDOR_DESC&quot;             &quot;AIR_CLOSURE_TIME&quot;             
+##  [55] &quot;WATERWAY_CLOSED&quot;               &quot;WATERWAY_DESC&quot;                
+##  [57] &quot;WATERWAY_CLOSURE_TIME&quot;         &quot;ROAD_CLOSED&quot;                  
+##  [59] &quot;ROAD_DESC&quot;                     &quot;ROAD_CLOSURE_TIME&quot;            
+##  [61] &quot;CLOSURE_DIRECTION&quot;             &quot;MAJOR_ARTERY&quot;                 
+##  [63] &quot;TRACK_CLOSED&quot;                  &quot;TRACK_DESC&quot;                   
+##  [65] &quot;TRACK_CLOSURE_TIME&quot;            &quot;MEDIA_INTEREST&quot;               
+##  [67] &quot;MEDIUM_DESC&quot;                   &quot;ADDITIONAL_MEDIUM_INFO&quot;       
+##  [69] &quot;BODY_OF_WATER&quot;                 &quot;TRIBUTARY_OF&quot;                 
+##  [71] &quot;NEAREST_RIVER_MILE_MAKER&quot;      &quot;RELEASE_SECURED&quot;              
+##  [73] &quot;ESTIMATED_DURATION_OF_RELEASE&quot; &quot;RELEASE_RATE&quot;                 
+##  [75] &quot;DESC_REMEDIAL_ACTION&quot;          &quot;STATE_AGENCY_ON_SCENE&quot;        
+##  [77] &quot;STATE_AGENCY_REPORT_NUM&quot;       &quot;OTHER_AGENCY_NOTIFIED&quot;        
+##  [79] &quot;WEATHER_CONDITIONS&quot;            &quot;AIR_TEMPERATURE&quot;              
+##  [81] &quot;WIND_SPEED&quot;                    &quot;WIND_DIRECTION&quot;               
+##  [83] &quot;WATER_SUPPLY_CONTAMINATED&quot;     &quot;SHEEN_SIZE&quot;                   
+##  [85] &quot;SHEEN_COLOR&quot;                   &quot;DIRECTION_OF_SHEEN_TRAVEL&quot;    
+##  [87] &quot;SHEEN_ODOR_DESCRIPTION&quot;        &quot;WAVE_CONDITION&quot;               
+##  [89] &quot;CURRENT_SPEED&quot;                 &quot;CURRENT_DIRECTION&quot;            
+##  [91] &quot;WATER_TEMPERATURE&quot;             &quot;TRACK_CLOSE_DIR&quot;              
+##  [93] &quot;EMPL_FATALITY&quot;                 &quot;PASS_FATALITY&quot;                
+##  [95] &quot;COMMUNITY_IMPACT&quot;              &quot;WIND_SPEED_UNIT&quot;              
+##  [97] &quot;EMPLOYEE_INJURIES&quot;             &quot;PASSENGER_INJURIES&quot;           
+##  [99] &quot;OCCUPANT_FATALITY&quot;             &quot;CURRENT_SPEED_UNIT&quot;           
+## [101] &quot;ROAD_CLOSURE_UNITS&quot;            &quot;TRACK_CLOSURE_UNITS&quot;          
+## [103] &quot;SHEEN_SIZE_UNITS&quot;              &quot;ADDITIONAL_INFO&quot;              
+## [105] &quot;STATE_AGENCY_NOTIFIED&quot;         &quot;FEDERAL_AGENCY_NOTIFIED&quot;      
+## [107] &quot;NEAREST_RIVER_MILE_MARKER&quot;     &quot;SHEEN_SIZE_LENGTH&quot;            
+## [109] &quot;SHEEN_SIZE_LENGTH_UNITS&quot;       &quot;SHEEN_SIZE_WIDTH&quot;             
+## [111] &quot;SHEEN_SIZE_WIDTH_UNITS&quot;        &quot;OFFSHORE&quot;                     
+## [113] &quot;DURATION_UNIT&quot;                 &quot;RELEASE_RATE_UNIT&quot;            
+## [115] &quot;RELEASE_RATE_RATE&quot;             &quot;PASSENGERS_TRANSFERRED&quot;       
+## [117] &quot;CHRIS_CODE&quot;                    &quot;CAS_NUMBER&quot;                   
+## [119] &quot;UN_NUMBER&quot;                     &quot;AMOUNT_OF_MATERIAL&quot;           
+## [121] &quot;UNIT_OF_MEASURE&quot;               &quot;NAME_OF_MATERIAL&quot;             
+## [123] &quot;IF_REACHED_WATER&quot;              &quot;AMOUNT_IN_WATER&quot;              
+## [125] &quot;UNIT_OF_MEASURE_REACH_WATER&quot;   &quot;Column1&quot;                      
+## [127] &quot;Column2&quot;                       &quot;Column3&quot;                      
+## [129] &quot;Column4&quot;                       &quot;Column5&quot;                      
+## [131] &quot;Column6&quot;                       &quot;Column7&quot;                      
+## [133] &quot;Column8&quot;                       &quot;Column9&quot;                      
+## [135] &quot;Column10&quot;                      &quot;Column11&quot;                     
+## [137] &quot;Column12&quot;                      &quot;Column13&quot;                     
+## [139] &quot;Column14&quot;                      &quot;Column15&quot;                     
+## [141] &quot;Column16&quot;                      &quot;Column17&quot;                     
+## [143] &quot;Column18&quot;                      &quot;Column19&quot;                     
+## [145] &quot;Column20&quot;                      &quot;Column21&quot;                     
+## [147] &quot;Column22&quot;                      &quot;Column23&quot;                     
+## [149] &quot;Column24&quot;                      &quot;Column25&quot;                     
+## [151] &quot;Column26&quot;                      &quot;Column27&quot;                     
+## [153] &quot;Column28&quot;                      &quot;Column29&quot;                     
+## [155] &quot;Column30&quot;                      &quot;Column31&quot;                     
+## [157] &quot;Column32&quot;                      &quot;Column33&quot;                     
+## [159] &quot;Column34&quot;                      &quot;Column35&quot;                     
+## [161] &quot;Column36&quot;                      &quot;Column37&quot;                     
+## [163] &quot;Column38&quot;                      &quot;Column39&quot;                     
+## [165] &quot;Column40&quot;                      &quot;Column41&quot;                     
+## [167] &quot;Column42&quot;                      &quot;Column43&quot;                     
+## [169] &quot;Column44&quot;                      &quot;Column45&quot;                     
+## [171] &quot;Column46&quot;                      &quot;Column47&quot;                     
+## [173] &quot;Column48&quot;                      &quot;Column49&quot;                     
+## [175] &quot;Column50&quot;</code></pre>
+<pre class="r"><code># Identify columns in each data frame
+column_diffs &lt;- lapply(data_frames, function(df) setdiff(unique_col_names, names(df)))
+
+# Print columns that are not in each data frame
+print(column_diffs)</code></pre>
+<pre><code>## $full_2010
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2011
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2012
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2013
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2014
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2015
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2016
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2017
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2018
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2019
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2020
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2021
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2022
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;
+## 
+## $full_2023
+## character(0)
+## 
+## $full_2024
+##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;</code></pre>
+<pre class="r"><code># Get columns in the 2023 dataset
+columns_2023 &lt;- colnames(full_2023)
+
+# Get columns in the reference dataset
+columns_reference &lt;- colnames(full_2010)  # assuming full_2010 has the correct columns
+
+# Find extra columns in the 2023 dataset
+extra_columns &lt;- setdiff(columns_2023, columns_reference)
+missing_columns &lt;- setdiff(columns_reference, columns_2023)
+
+# Print extra columns
+print(extra_columns)</code></pre>
+<pre><code>##  [1] &quot;Column1&quot;  &quot;Column2&quot;  &quot;Column3&quot;  &quot;Column4&quot;  &quot;Column5&quot;  &quot;Column6&quot; 
+##  [7] &quot;Column7&quot;  &quot;Column8&quot;  &quot;Column9&quot;  &quot;Column10&quot; &quot;Column11&quot; &quot;Column12&quot;
+## [13] &quot;Column13&quot; &quot;Column14&quot; &quot;Column15&quot; &quot;Column16&quot; &quot;Column17&quot; &quot;Column18&quot;
+## [19] &quot;Column19&quot; &quot;Column20&quot; &quot;Column21&quot; &quot;Column22&quot; &quot;Column23&quot; &quot;Column24&quot;
+## [25] &quot;Column25&quot; &quot;Column26&quot; &quot;Column27&quot; &quot;Column28&quot; &quot;Column29&quot; &quot;Column30&quot;
+## [31] &quot;Column31&quot; &quot;Column32&quot; &quot;Column33&quot; &quot;Column34&quot; &quot;Column35&quot; &quot;Column36&quot;
+## [37] &quot;Column37&quot; &quot;Column38&quot; &quot;Column39&quot; &quot;Column40&quot; &quot;Column41&quot; &quot;Column42&quot;
+## [43] &quot;Column43&quot; &quot;Column44&quot; &quot;Column45&quot; &quot;Column46&quot; &quot;Column47&quot; &quot;Column48&quot;
+## [49] &quot;Column49&quot; &quot;Column50&quot;</code></pre>
+<pre class="r"><code># Print missing columns
+print(missing_columns)</code></pre>
+<pre><code>## character(0)</code></pre>
+<pre class="r"><code># Keep only the columns present in the reference data set
+full_2023 &lt;- full_2023[, columns_reference]</code></pre>
+<pre class="r"><code>convert_columns &lt;- function(df, template) {
+  for (col in intersect(names(df), names(template))) {
+    template_class &lt;- class(template[[col]])
+    
+    if (&quot;character&quot; %in% template_class) {
+      df[[col]] &lt;- as.character(df[[col]])
+    } else if (&quot;numeric&quot; %in% template_class || &quot;double&quot; %in% template_class) {
+      df[[col]] &lt;- as.numeric(df[[col]])
+    } else if (&quot;integer&quot; %in% template_class) {
+      df[[col]] &lt;- as.integer(df[[col]])
+    } else if (&quot;factor&quot; %in% template_class) {
+      df[[col]] &lt;- as.factor(df[[col]])
+    } else if (&quot;Date&quot; %in% template_class) {
+      df[[col]] &lt;- as.Date(df[[col]])
+    } else if (&quot;POSIXct&quot; %in% template_class) {
+      df[[col]] &lt;- as.POSIXct(df[[col]], format = &quot;%Y-%m-%d %H:%M:%S&quot;, tz = &quot;UTC&quot;)
+    } else if (&quot;logical&quot; %in% template_class) {
+      df[[col]] &lt;- as.logical(df[[col]])
+    } else if (&quot;character&quot; %in% template_class &amp; &quot;logical&quot; %in% class(df[[col]])) {
+      df[[col]] &lt;- as.character(df[[col]])
+    }
+  }
+  return(df)
+}</code></pre>
+<pre class="r"><code># Apply the conversion to all data frames to match full_2017
+full_2010 &lt;- convert_columns(full_2010, full_2010)
+full_2011 &lt;- convert_columns(full_2011, full_2010)
+full_2012 &lt;- convert_columns(full_2012, full_2010)
+full_2013 &lt;- convert_columns(full_2013, full_2010)
+full_2014 &lt;- convert_columns(full_2014, full_2010)
+full_2015 &lt;- convert_columns(full_2015, full_2010)
+full_2016 &lt;- convert_columns(full_2016, full_2010)
+full_2017 &lt;- convert_columns(full_2017, full_2010)
+full_2018 &lt;- convert_columns(full_2018, full_2010)
+full_2019 &lt;- convert_columns(full_2019, full_2010)
+full_2020 &lt;- convert_columns(full_2020, full_2010)
+full_2021 &lt;- convert_columns(full_2021, full_2010)
+full_2022 &lt;- convert_columns(full_2022, full_2010)
+full_2023 &lt;- convert_columns(full_2023, full_2010)
+full_2024 &lt;- convert_columns(full_2024, full_2010)</code></pre>
+<pre class="r"><code>df_full &lt;- bind_rows(full_2010, full_2011, full_2012, full_2013, full_2014, full_2015, full_2016, full_2017, full_2018, full_2019, full_2020, full_2021, full_2022, full_2023, full_2024)</code></pre>
+<pre class="r"><code>#write.csv(df_full, &quot;~/Oil-Refinery/Analysis/Join Data/Full Merge/full_merge.csv&quot;, row.names = FALSE)
+write.csv(df_full, gzfile(&quot;~/Oil-Refinery/Analysis/Join Data/Full Merge/full_merge_compressed.csv.gz&quot;), row.names = FALSE)</code></pre>
 
 
 
