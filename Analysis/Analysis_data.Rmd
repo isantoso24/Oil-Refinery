@@ -319,3 +319,28 @@ write.csv(df_full, gzfile("~/Oil-Refinery/Analysis/Join Data/Full Merge/full_mer
 
 ```
 
+```{r}
+company_list <- read.csv("~/Oil-Refinery/Data/Company_list.csv")
+names(company_list)
+```
+
+```{r}
+company_list$Name <- company_list$Name.in.NRC.Data
+
+company_list <- company_list %>%
+  select("Name")
+```
+
+
+```{r}
+company_list <- company_list %>%
+  filter(!is.na(Name) & trimws(Name) != "" & Name != "-") %>%
+  distinct(Name, .keep_all = TRUE)
+```
+
+```{r}
+
+```
+
+
+
