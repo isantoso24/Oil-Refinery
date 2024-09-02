@@ -16,6 +16,10 @@ library(readxl)
 library(dplyr)
 #install.packages("readr")
 library(readr)
+#install.packages("stringr")
+library(stringr)
+#install.packages("tidyr")
+library(tidyr)
 ```
 
 ```{r read-file}
@@ -335,12 +339,25 @@ company_list <- company_list %>%
 ```{r}
 company_list <- company_list %>%
   filter(!is.na(Name) & trimws(Name) != "" & Name != "-") %>%
-  distinct(Name, .keep_all = TRUE)
+  distinct(Name, .keep_all = TRUE) %>%
+  separate_rows(Name, sep = ",") %>%
+  mutate(Name = trimws(Name))
+```
+
+
+```{r}
+# Create a vector of the names or strings you want to match
+search_strings <- company_list$Name
 ```
 
 ```{r}
-
+# Filter the large dataset
+filtered_data <- df_full %>%
+  filter(str_detect(RESPONSIBLE_COMPANY, paste(search_strings, collapse = "|")))
 ```
 
+```{r}
+write.csv(filtered_data, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data.csv", row.names = FALSE)
+```
 
 
