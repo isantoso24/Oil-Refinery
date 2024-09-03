@@ -357,7 +357,23 @@ filtered_data <- df_full %>%
 ```
 
 ```{r}
-write.csv(filtered_data, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data.csv", row.names = FALSE)
+filtered_data <- filtered_data %>%
+  mutate(
+    LONG = paste(LONG_DEG, "°", LONG_MIN, "'", LONG_SEC, "''", LONG_QUAD, sep = " "),
+    LAT = paste(LAT_DEG, "°", LAT_MIN, "'", LAT_SEC, "''", LAT_QUAD, sep = " ")
+  )
+```
+
+```{r}
+filtered_data_na <- filtered_data %>%
+  filter(!is.na(LONG_DEG) & !is.na(LAT_DEG))
+```
+
+
+```{r}
+#write.csv(filtered_data, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data.csv", row.names = FALSE)
+
+write.csv(filtered_data_na, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data_no_na.csv", row.names = FALSE)
 ```
 
 
