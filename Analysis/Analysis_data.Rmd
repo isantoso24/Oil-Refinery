@@ -359,8 +359,8 @@ filtered_data <- df_full %>%
 ```{r}
 filtered_data <- filtered_data %>%
   mutate(
-    LONG = paste(LONG_DEG, "°", LONG_MIN, "'", LONG_SEC, "''", LONG_QUAD, sep = " "),
-    LAT = paste(LAT_DEG, "°", LAT_MIN, "'", LAT_SEC, "''", LAT_QUAD, sep = " ")
+    LONG = paste(LONG_QUAD, LONG_DEG, "°", LONG_MIN, "'", LONG_SEC, "''"),
+    LAT = paste(LAT_QUAD, LAT_DEG, "°", LAT_MIN, "'", LAT_SEC, "''")
   )
 ```
 
