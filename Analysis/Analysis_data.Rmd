@@ -20,6 +20,8 @@ library(readr)
 library(stringr)
 #install.packages("tidyr")
 library(tidyr)
+install.packages("ggplot2")
+library(ggplot2)
 ```
 
 ```{r read-file}
@@ -357,23 +359,67 @@ filtered_data <- df_full %>%
 ```
 
 ```{r}
+convert_to_decimal <- function(degrees, minutes, seconds, direction) {
+  decimal_degrees <- degrees + minutes / 60 + seconds / 3600
+  # Apply negative sign for "S" (South) or "W" (West)
+  decimal_degrees <- ifelse(direction %in% c("S", "W"), -decimal_degrees, decimal_degrees)
+  return(decimal_degrees)
+}
+```
+
+
+```{r}
 filtered_data <- filtered_data %>%
   mutate(
-    LONG = as.numeric(paste0(LONG_QUAD, LONG_DEG, "°", LONG_MIN, "'", LONG_SEC, "''")),
-    LAT = as.numeric(paste0(LAT_QUAD, LAT_DEG, "°", LAT_MIN, "'", LAT_SEC, "''"))
+    LONG_DECIMAL = convert_to_decimal(LONG_DEG, LONG_MIN, LONG_SEC, LONG_QUAD),
+    LAT_DECIMAL = convert_to_decimal(LAT_DEG, LAT_MIN, LAT_SEC, LAT_QUAD)
   )
 ```
 
 ```{r}
 filtered_data_na <- filtered_data %>%
-  filter(!is.na(LONG_DEG) & !is.na(LAT_DEG))
+  filter(!is.na(LONG_DECIMAL) & !is.na(LAT_DECIMAL))
+```
+
+```{r}
+filtered_data_na_add <- filtered_data %>%
+  filter(!is.na(LOCATION_ADDRESS) & !is.na(LOCATION_ADDRESS))
 ```
 
 
 ```{r}
 #write.csv(filtered_data, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data.csv", row.names = FALSE)
 
-write.csv(filtered_data_na, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data_no_na.csv", row.names = FALSE)
+#write.csv(filtered_data_na, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data_no_na.csv", row.names = FALSE)
+
+write.csv(filtered_data_na_add, "~/Oil-Refinery/Analysis/Join Data/Filtered/filtered_data_address.csv", row.names = FALSE)
+```
+
+```{r}
+ggplot(filtered_data_na_add, aes(x = TYPE_OF_INCIDENT)) + 
+  geom_bar(stat = "count") +
+  labs(title = "Number of Incidents", x = "Incident", y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_x_discrete(limits = names(sort(table(filtered_data_na_add$TYPE_OF_INCIDENT), decreasing = TRUE)))
+```
+```{r}
+ggplot(filtered_data_na_add, aes(x = DATE_TIME_RECEIVED, y = TYPE_OF_INCIDENT)) + 
+  geom_point() +
+  labs(title = "Incidents Over Time", x = "Time", y = "Incident") +
+  theme_minimal()
+```
+
+```{r}
+long_lat_missing <- filtered_data_na_add %>%
+  mutate(first_name = str_extract(RESPONSIBLE_COMPANY, "^\\S+")) %>%
+  filter(is.na(LONG_DECIMAL) & is.na(LAT_DECIMAL))
+```
+
+```{r}
+company_missing <- long_lat_missing %>%
+  group_by(first_name) %>%
+  summarise(count = n())
 ```
 
 
